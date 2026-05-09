@@ -3,7 +3,7 @@
 > 🤖 一个始终浮在屏幕最前面的暖心小窗，配合CoPaw 定时任务，定时推送暖心提醒、AI 资讯、旅游推荐等等，推送内容可以自己定制。
 
 ---
-<img width="1706" height="805" alt="Qwenpaw悬浮窗" src="https://github.com/user-attachments/assets/0176c86b-e9eb-4866-94a2-febe893eb6bb" />
+<img width="1706" height="805" alt="Qwenpaw悬浮窗" src="https://github.com/user-attachments/assets/ede7d286-2dd7-4843-974b-eeb4b9de5ce0" />
 
 ## ✨ 功能特性
 
@@ -24,10 +24,11 @@
 
 ```
 📁 copaw-floater/
-├── copaw_floater.py       # 主程序
-├── start.bat              # Windows 一键启动脚本
-├── message.json           # 消息文件（修改这里的内容，悬浮窗自动更新）
-└── README.md              # 本文件
+├── copaw_floater.py       # 🪟 悬浮窗主程序
+├── start.bat              # 🚀 Windows 一键启动脚本
+├── setup.py               # 🛠️ 一键配置工具（推荐先运行这个）
+├── message.json           # 📝 消息文件（修改这里，悬浮窗自动更新）
+└── README.md              # 📖 使用说明
 ```
 
 ---
@@ -36,56 +37,30 @@
 
 ### 环境要求
 
-- **Python 3.6+**（tkinter 通常随 Python 一起安装，无需额外配置）
+- **Python 3.6+**（tkinter 通常随 Python 一起安装）
+- **CoPaw**：如需定时推送功能，请先安装 [CoPaw](https://github.com/agentscope-ai/QwenPaw)
 
-### Windows
+### 🛠️ 一键配置（推荐）
 
-1. 双击 `start.bat`
-2. 右下角出现小窗 ✨
+```bash
+python setup.py
+```
 
-### macOS / Linux
+跟着提示走，脚本会自动完成所有配置和启动 ✅
 
+### 手动启动
+
+如果只想显示自定义文字，不配合 CoPaw：
+
+#### Windows
+双击 `start.bat`，右下角出现小窗 ✨
+
+#### macOS / Linux
 ```bash
 python3 copaw_floater.py &
 ```
 
----
-
-## 🧠 高级玩法：配合 CoPaw 定时任务
-
-> 这是 **小问悬浮窗 + CoPaw** 的完全体使用方式——让小问定时「活过来」给你发消息。
-
-### 1. 安装 [CoPaw](https://github.com/agentscope-ai/QwenPaw)
-
-### 2. 创建后台会话
-
-```bash
-copaw chats create --session-id my_floater_bg --user-id default --agent-id default
-```
-
-### 3. 创建定时任务（每15分钟唤醒一次）
-
-```bash
-copaw cron create \
-  --agent-id default \
-  --type agent \
-  --name "小问陪伴" \
-  --cron "*/15 * * * *" \
-  --channel console \
-  --target-user default \
-  --target-session my_floater_bg \
-  --text "[小问陪伴] 请先获取当前时间，然后生成一段暖心的陪伴话语，写入 message.json 文件（路径自行指定，JSON格式：{\"message\": \"你的话\", \"time\": \"当前时间\", \"type\": \"chat\"}）。注意根据时间段提醒休息/喝水/看文献/吃饭/睡觉。"
-```
-
-### 4. 修改代码中的 `MESSAGE_FILE` 路径
-
-打开 `copaw_floater.py`，找到这一行：
-
-```python
-MESSAGE_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "message.json")
-```
-
-改为 CoPaw 定时任务写入的实际路径即可。
+然后编辑 `message.json` 写入想显示的内容即可。
 
 ---
 
@@ -124,8 +99,6 @@ REFRESH_MS = 5000  # 毫秒，5000 = 5秒检查一次新消息
 ### Q: 不想用 CoPaw，只想显示固定文字？
 直接编辑 `message.json`，写入你想显示的内容即可，悬浮窗会自动更新。
 
-### Q: 有个人信息泄露风险吗？
-`message.json` 是唯一存储消息内容的文件。如果配合 CoPaw 使用，定时任务写入的内容可能包含个人信息，**请勿将 `message.json` 上传到公开仓库**。代码本身不含任何个人信息。
 
 ---
 
