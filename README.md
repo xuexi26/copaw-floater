@@ -3,6 +3,7 @@
 > 🤖 一个始终浮在屏幕最前面的暖心小窗，配合CoPaw 定时任务，定时推送暖心提醒、AI 资讯、旅游推荐等等，推送内容可以自己定制。
 
 ---
+<img width="1706" height="805" alt="Qwenpaw悬浮窗" src="https://github.com/user-attachments/assets/0176c86b-e9eb-4866-94a2-febe893eb6bb" />
 
 ## ✨ 功能特性
 
